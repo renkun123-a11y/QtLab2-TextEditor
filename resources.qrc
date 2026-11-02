@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="app.png">icons/app.png</file>
+        <file alias="new.png">icons/new.png</file>
+        <file alias="open.png">icons/open.png</file>
+        <file alias="save.png">icons/save.png</file>
+        <file alias="saveas.png">icons/saveas.png</file>
+        <file alias="undo.png">icons/undo.png</file>
+        <file alias="redo.png">icons/redo.png</file>
+        <file alias="cut.png">icons/cut.png</file>
+        <file alias="copy.png">icons/copy.png</file>
+        <file alias="paste.png">icons/paste.png</file>
+        <file alias="find.png">icons/find.png</file>
+        <file alias="replace.png">icons/replace.png</file>
+        <file alias="font.png">icons/font.png</file>
+        <file alias="textcolor.png">icons/textcolor.png</file>
+        <file alias="textbackground.png">icons/textbackground.png</file>
+        <file alias="editorbackground.png">icons/editorbackground.png</file>
+        <file alias="linenumbers.png">icons/linenumbers.png</file>
+        <file alias="wrap.png">icons/wrap.png</file>
+    </qresource>
+</RCC>
