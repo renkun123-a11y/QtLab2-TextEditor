@@ -17,7 +17,7 @@ echo [2/2] mingw32-make ...
 if errorlevel 1 goto err
 
 echo.
-echo Build OK  --^>  build\TextEditor.exe
+echo Build OK  --^>  build\release\TextEditor.exe
 exit /b 0
 
 :err

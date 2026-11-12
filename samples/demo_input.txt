@@ -1,0 +1,4 @@
+小牛文本编辑器演示
+第一行：中文输入与换行测试
+第二行：The quick brown fox jumps over the lazy dog.
+第三行：hello world
