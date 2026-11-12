@@ -415,7 +415,7 @@ void shot11()
     editor()->moveCursor(QTextCursor::EndOfLine);
     wait(300);
     captureWindow(QStringLiteral("11-editor-background"));
-    editor()->setEditorBackgroundColor(QColor(Qt::white));
+    // 截图放在最后执行，不在中间复原底色，避免影响后面截图的背景色
 }
 
 void shot12()
@@ -633,7 +633,6 @@ int main(int argc, char *argv[])
     shot08();
     shot09();
     shot10();
-    shot11();
     shot12();
     shot13();
     shot14();
@@ -648,6 +647,7 @@ int main(int argc, char *argv[])
     shot23();
     shot24();
     shot25();
+    shot11();   // 改底色会影响后续截图，放到最后
 
     qInfo() << "全部截图完成，输出目录：" << g_outputDir;
     return 0;

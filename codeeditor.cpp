@@ -134,6 +134,9 @@ void CodeEditor::setEditorBackgroundColor(const QColor &color)
     pal.setColor(QPalette::Base, color);
     pal.setColor(QPalette::Text, color.lightness() > 128 ? QColor(Qt::black) : QColor(Qt::white));
     setPalette(pal);
+    // QAbstractScrollArea 的 viewport 自己带一份调色板（WA_SetPalette），
+    // 只改编辑器的调色板不会传到它，背景会停在原来的颜色上；必须单独设置。
+    viewport()->setPalette(pal);
 
     updateHighlightColor();             // 当前行高亮跟着底色走
     m_lineNumberArea->update();         // 行号区底色同步
@@ -215,9 +218,20 @@ void CodeEditor::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
 
+    // 当前行已经有字符背景色（格式 → 字体背景色）时不再叠加整行高亮，
+    // 否则高亮会盖住用户刚设置的文字底色，看上去像“颜色没生效”。
+    bool hasCharBackground = false;
+    const QTextBlock block = textCursor().block();
+    for (QTextBlock::iterator it = block.begin(); !it.atEnd(); ++it) {
+        if (it.fragment().charFormat().hasProperty(QTextFormat::BackgroundBrush)) {
+            hasCharBackground = true;
+            break;
+        }
+    }
+
     // 有选区时不画当前行高亮：额外选区画在文本选区之上，
     // 否则选中的文字会被高亮色盖住，看起来像没有选中。
-    if (!isReadOnly() && !textCursor().hasSelection()) {
+    if (!isReadOnly() && !textCursor().hasSelection() && !hasCharBackground) {
         QTextEdit::ExtraSelection selection;
         selection.format.setBackground(m_highlightColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
